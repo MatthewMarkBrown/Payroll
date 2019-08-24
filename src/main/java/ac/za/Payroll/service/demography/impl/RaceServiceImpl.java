@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
-
+@Service("RaceServiceImpl")
 public class RaceServiceImpl implements RaceService {
+    @Autowired
+    @Qualifier("InMemory")
 
     private static RaceServiceImpl service = null;
     private RaceRepository repository;

@@ -37,7 +37,7 @@ public class GenderServiceImplTest {
 
     @Test
     public void c_update() {
-        String newGenderName = "Application Development Theory 3";
+        String newGenderName = "Test ADP3";
         Gender updated = new Gender.Builder().copy(getSaved()).genderName(newGenderName).build();
         System.out.println("In update, updated = " + updated);
         this.repository.update(updated);

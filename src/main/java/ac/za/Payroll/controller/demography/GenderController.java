@@ -12,7 +12,8 @@ import java.util.Set;
 @RestController
 @RequestMapping("/payroll/gender")
 public class GenderController {
-
+    @Autowired
+    @Qualifier("GenderServiceImpl")
     private GenderServiceImpl service;
 
     @GetMapping("/create/{genderName}")

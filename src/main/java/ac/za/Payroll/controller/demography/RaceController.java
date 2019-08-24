@@ -12,7 +12,8 @@ import java.util.Set;
 @RestController
 @RequestMapping("/payroll/race")
 public class RaceController {
-
+    @Autowired
+    @Qualifier("RaceServiceImpl")
     private RaceServiceImpl service;
 
     @GetMapping("/create/{raceName}")

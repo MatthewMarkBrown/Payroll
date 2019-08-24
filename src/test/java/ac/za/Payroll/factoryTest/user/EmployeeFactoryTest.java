@@ -15,7 +15,7 @@ public class EmployeeFactoryTest {
     public void setUp() throws Exception {
         this.testFirstName = "testName";
         this.testLastName = "testName";
-        this.testAge = 25;
+        this.testAge = 20;
     }
 
     @Test

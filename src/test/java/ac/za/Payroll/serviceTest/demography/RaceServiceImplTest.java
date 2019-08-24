@@ -24,7 +24,7 @@ public class RaceServiceImplTest {
     @Before
     public void setUp() throws Exception {
         this.repository = RaceRepositoryImpl.getRepository();
-        this.race = RaceFactory.buildRace("Asian");
+        this.race = RaceFactory.buildRace("Coloured");
     }
 
     @Test
@@ -37,7 +37,7 @@ public class RaceServiceImplTest {
 
     @Test
     public void c_update() {
-        String newRaceName = "Asian";
+        String newRaceName = "Coloured";
         Race updated = new Race.Builder().copy(getSaved()).raceName(newRaceName).build();
         System.out.println("In update, updated = " + updated);
         this.repository.update(updated);

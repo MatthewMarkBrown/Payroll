@@ -24,7 +24,7 @@ public class EmployeeServiceImplTest {
     @Before
     public void setUp() throws Exception {
         this.repository = (EmployeeRepositoryImpl) EmployeeRepositoryImpl.getRepository();
-        this.employee = EmployeeFactory.buildEmployee("Deklerk", "Basson", 23);
+        this.employee = EmployeeFactory.buildEmployee("Matthew", "Brown", 23);
     }
 
     @Test
@@ -37,7 +37,7 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void c_update() {
-        String newEmployeeName = "Deklerk";
+        String newEmployeeName = "Matthew";
         Employee updated = new Employee.Builder().copy(getSaved()).employeeFirstName(newEmployeeName).build();
         System.out.println("In update, updated = " + updated);
         this.repository.update(updated);
