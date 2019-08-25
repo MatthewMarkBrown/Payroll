@@ -4,47 +4,56 @@ import ac.za.Payroll.model.user.Employee;
 import ac.za.Payroll.repository.user.EmployeeRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 @Repository("InMemory")
 public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     private static EmployeeRepositoryImpl repository = null;
-    private Map<String, Employee> employeess;
+    private Set<Employee> employees;
 
-    private EmployeeRepositoryImpl() {
-        this.employeess = new HashMap<>();
+    private EmployeeRepositoryImpl(){
+        this.employees = new HashSet<>();
     }
 
-    public static EmployeeRepository getRepository(){
+    private Employee find(String employee) {
+        return this.employees.stream()
+                .filter(id -> id.getEmployeeId().equals(employee))
+                .findAny()
+                .orElse(null);
+    }
+
+    public static EmployeeRepositoryImpl getRepository(){
         if(repository == null) repository = new EmployeeRepositoryImpl();
         return repository;
     }
 
     public Employee create(Employee employee){
-        this.employeess.put(employee.getEmployeeId(),employee);
+        this.employees.add(employee);
         return employee;
     }
 
-    public Employee read(String employeeId){
-        return this.employeess.get(employeeId);
+    public Employee read(final String employees){
+        Employee employee = find(employees);
+        return employee;
+    }
+
+    public void delete(String employees) {
+        Employee employee = find(employees);
+        if(employee != null) this.employees.remove(employee);
     }
 
     public Employee update(Employee employee) {
-        this.employeess.replace(employee.getEmployeeId(),employee);
-        return this.employeess.get(employee.getEmployeeId());
-    }
-
-    public void delete(String employeeId) {
-        this.employeess.remove(employeeId);
+        Employee delete = find(employee.getEmployeeId());
+        if(delete != null){
+            this.employees.remove(delete);
+            return create(employee);
+        }
+        return null;
     }
 
     public Set<Employee> getAll(){
-        Collection<Employee> students = this.employeess.values();
-        Set<Employee> set = new HashSet<>();
-        set.addAll(students);
-        return set;
+        return this.employees;
     }
 }
